@@ -131,12 +131,6 @@ outputs/
 
 ---
 
-Run everything:
-
-```bash
-python main.py
-```
-
 ---
 
 # 📊 6. Analytical Questions & Rationale
