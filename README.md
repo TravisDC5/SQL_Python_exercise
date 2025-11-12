@@ -1,4 +1,4 @@
-# 🚀 SpaceX Launch Data Engineering & Analytics Project
+#  SpaceX Launch Data Engineering & Analytics Project
 
 This project demonstrates an end‑to‑end data engineering workflow using **public SpaceX launch data**, including:
 
@@ -11,7 +11,7 @@ This project demonstrates an end‑to‑end data engineering workflow using **pu
 
 ---
 
-# 📦 1. Prerequisites
+#  1. Prerequisites
 
 Install project dependencies:
 
@@ -29,7 +29,7 @@ matplotlib
 
 ---
 
-# 🛠️ 2. Project Structure
+#  2. Project Structure
 
 ```
 Get_SpaceX_Data.py        # Ingestion + database creation (ETL)
@@ -45,7 +45,7 @@ README.md
 
 ---
 
-# 🚀 3. Dataset: SpaceX REST API
+#  3. Dataset: SpaceX REST API
 
 **Source:** https://github.com/r-spacex/SpaceX-API
 
@@ -58,7 +58,7 @@ README.md
 
 ---
 
-# 🧩 4. Schema Design (ERD)
+#  4. Schema Design (ERD)
 
 This project uses a clean star schema optimized for analytics:
 
@@ -79,13 +79,13 @@ All foreign keys and indexes are created automatically during ingestion.
 
 ---
 
-# 🔄 5. End‑to‑End Pipeline
+#  5. End‑to‑End Pipeline
 
 This project is executed in **two steps**, matching a real-world engineering workflow.
 
 ---
 
-## ✅ Step 1 — Build Database & Ingest Data
+##  Step 1 — Build Database & Ingest Data
 Runs the full ETL pipeline:
 
 - Fetches JSON from 4 SpaceX API endpoints  
@@ -108,7 +108,7 @@ spacex.db
 
 ---
 
-## ✅ Step 2 — Run All SQL Queries & Generate Outputs
+##  Step 2 — Run All SQL Queries & Generate Outputs
 
 This step:
 
@@ -130,23 +130,6 @@ outputs/
 ```
 
 ---
-
-# ⭐ Optional: One‑Command Master Runner
-
-If you prefer a single command, include this file:
-
-### `main.py`
-```python
-import subprocess
-
-print("=== Running SpaceX Ingestion ===")
-subprocess.run(["python", "Get_SpaceX_Data.py"], check=True)
-
-print("=== Running SpaceX Analytics ===")
-subprocess.run(["python", "Run_SpaceX_Queries.py"], check=True)
-
-print("=== All tasks completed successfully! ===")
-```
 
 Run everything:
 
