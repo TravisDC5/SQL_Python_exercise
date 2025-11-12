@@ -1,4 +1,4 @@
-🚀 SpaceX Launch Data Engineering & Analytics Project
+SpaceX Launch Data Engineering & Analytics Project
 
 This project demonstrates an end-to-end data engineering workflow using public SpaceX launch data, including:
 
@@ -16,7 +16,7 @@ Packaging for full reproducibility
 
 The project is built to satisfy the requirements of a data engineering assessment emphasizing ingestion, schema design, SQL analytics, Python craftsmanship, and clear communication.
 
-📦 1. Prerequisites
+1. Prerequisites
 
 Install Python 3.9+ and the required packages:
 
@@ -29,7 +29,7 @@ requests
 pandas
 matplotlib
 
-🛠️ 2. Project Structure
+2. Project Structure
 .
 ├── main_spacex.py            # Full end-to-end pipeline
 ├── requirements.txt
@@ -38,7 +38,7 @@ matplotlib
     ├── spacex_analytics_YYYYMMDD_HHMM.xlsx
     └── spacex_monthly_trend.png
 
-🚀 3. Dataset: SpaceX REST API
+3. Dataset: SpaceX REST API
 
 Source:
 https://github.com/r-spacex/SpaceX-API
@@ -57,7 +57,7 @@ Large enough for meaningful analytics (~10–20 MB normalized)
 
 High-quality metadata enables business-style questions
 
-🧩 4. Schema Design (SQLite)
+4. Schema Design (SQLite)
 
 This project uses a normalized schema optimized for analytical queries:
 
@@ -91,7 +91,7 @@ Fast filtering and join performance
 
 Idempotent upserts maintain correctness over time
 
-🔄 5. End-to-End Pipeline
+5. End-to-End Pipeline
 
 Run everything with:
 
@@ -146,7 +146,7 @@ Excel workbook (all query results)
 
 Monthly trend visualization (PNG)
 
-📊 6. Analytical Questions & Rationale
+6. Analytical Questions & Rationale
 
 Below are the questions answered by the pipeline, with a brief explanation of why each is analytically interesting:
 
@@ -203,7 +203,7 @@ Good for reviewers to scan your analytics quickly.
 
 Line chart showing monthly launch counts and successes.
 
-🧪 8. How to Reproduce Everything
+8. How to Reproduce Everything
 
 Clone the repo:
 
@@ -223,7 +223,7 @@ python main_spacex.py
 
 View outputs in the /outputs folder.
 
-📈 9. Optional Enhancements (for extra credit)
+9. Optional Enhancements (for extra credit)
 
 These are not required but demonstrate polish:
 
@@ -237,18 +237,18 @@ Add CLI flags (e.g., --no-chart, --db custom.db)
 
 Add unit tests for normalization functions
 
-✔️ 10. Assessment Checklist
+10. Assessment Checklist
 Requirement	Status
-Public dataset ≥10MB	✅ SpaceX API
-Clear schema, PK/FK, indexing	✅ Implemented
-Idempotent ingestion	✅ Upsert logic
-Two SQL questions	✅ Ten provided
-One Python (pandas/matplotlib)	✅ Monthly trend chart
-End-to-end single command	✅ python main_spacex.py
-README with rationale	✅ (this file)
-requirements.txt	✅ Provided
-No raw data in repo	✅ API-based
-🙌 Author & Thanks
+Public dataset ≥10MB	 SpaceX API
+Clear schema, PK/FK, indexing	 Implemented
+Idempotent ingestion	 Upsert logic
+Two SQL questions	 Ten provided
+One Python (pandas/matplotlib)	 Monthly trend chart
+End-to-end single command	 python main_spacex.py
+README with rationale	 (this file)
+requirements.txt	 Provided
+No raw data in repo	 API-based
+Author & Thanks
 
 Author: Travis Christensen
 This project is created exclusively for a data engineering skills assessment.
