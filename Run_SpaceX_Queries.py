@@ -1,5 +1,8 @@
 import sqlite3
 import pandas as pd
+from pathlib import Path
+from datetime import datetime
+import os
 
 # Connect to your existing SQLite DB built by spacex_ingest.py
 conn = sqlite3.connect("spacex.db")
@@ -143,6 +146,12 @@ queries = {
     """
 }
 
+# Directory for outputs
+OUTPUTS_DIR = Path(__file__).parent / "outputs"
+OUTPUTS_DIR.mkdir(exist_ok=True)
+
+results = {}
+
 # Run and display each query (pretty print)
 for title, sql in queries.items():
     print("\n" + "="*100)
@@ -152,10 +161,43 @@ for title, sql in queries.items():
         df = pd.read_sql_query(sql, conn)
         if not df.empty:
             print(df.head(20).to_string(index=False))
+            # Save this result in memory so we can export it
+            results[title] = df
         else:
             print("No results returned.")
     except Exception as e:
         print(f"Error running query: {e}")
 
+# Export all results to a single Excel workbook (if we have any)
+if results:
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+    xlsx_path = OUTPUTS_DIR / f"spacex_analytics_{timestamp}.xlsx"
+
+    with pd.ExcelWriter(xlsx_path, engine="openpyxl") as writer:
+        for title, df in results.items():
+
+            # Excel sheet names must be valid and <= 31 characters
+            invalid_chars = ['\\', '/', '*', '?', ':', '[', ']']
+            sheet_name = title
+            for ch in invalid_chars:
+                sheet_name = sheet_name.replace(ch, " ")
+            sheet_name = sheet_name[:31]
+
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+    print(f"\n Excel exported: {xlsx_path}")
+else:
+    print("\n No non-empty query results to export.")
+
+
+# Close the DB connection
 conn.close()
 print("\nFinished running SpaceX queries.")
+
+# Auto-open outputs folder (Windows)
+try:
+    os.startfile(str(OUTPUTS_DIR))
+    print(f"\n Opened outputs folder: {OUTPUTS_DIR}")
+except Exception as e:
+    print(f"\n Could not open folder automatically: {e}")
+    print(f"You can open it manually here: {OUTPUTS_DIR}")
