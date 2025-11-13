@@ -196,11 +196,6 @@ python Get_SpaceX_Data.py
 python Run_SpaceX_Queries.py
 ```
 
-(Optional)
-
-```bash
-python main.py
-```
 
 ---
 
@@ -219,6 +214,22 @@ python main.py
 | No raw data checked in |  API-based ETL |
 
 ---
+
+## Tests & CI
+
+This project includes:
+
+- **Pytest tests** in `tests/`:
+  - `test_ingestion.py` verifies that the SQLite DB and core tables are created.
+  - `test_queries.py` runs smoke tests on core analytical queries.
+
+Run tests locally with:
+```bash
+pytest
+```
+
+---
+
 
 #  Summary
 
