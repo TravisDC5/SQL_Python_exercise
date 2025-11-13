@@ -25,6 +25,8 @@ Dependencies include:
 requests
 pandas
 matplotlib
+pytest
+openpyxl
 ```
 
 ---
