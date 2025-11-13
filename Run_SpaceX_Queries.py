@@ -189,7 +189,6 @@ if results:
 else:
     print("\n No non-empty query results to export.")
 
-
 # Close the DB connection
 conn.close()
 print("\nFinished running SpaceX queries.")
