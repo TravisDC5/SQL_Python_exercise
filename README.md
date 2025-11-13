@@ -36,7 +36,6 @@ openpyxl
 ```
 Get_SpaceX_Data.py        # Ingestion + database creation (ETL)
 Run_SpaceX_Queries.py     # Analytical SQL queries + visualization
-main.py (optional)        # Runs both scripts end‑to‑end
 requirements.txt
 spacex.db                 # Auto-generated SQLite database
 outputs/
