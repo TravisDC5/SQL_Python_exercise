@@ -181,7 +181,7 @@ Clone the repo:
 
 ```bash
 git clone https://github.com/TravisDC5/SQL_Python_exercise.git
-cd <repo>
+cd SQL_Python_exercise
 ```
 
 Install dependencies:
