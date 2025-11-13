@@ -131,9 +131,7 @@ outputs/
 
 ---
 
----
-
-# 📊 6. Analytical Questions & Rationale
+#  6. Analytical Questions & Rationale
 
 The SQL portion answers 10 meaningful questions, including:
 
@@ -160,7 +158,7 @@ Includes payload mass extremes, average mass by year, and referential integrity.
 
 ---
 
-# 📁 7. Outputs
+#  7. Outputs
 
 After running the scripts, you will find:
 
@@ -176,7 +174,7 @@ outputs/spacex_monthly_trend.png
 
 ---
 
-# 🧪 8. How to Reproduce
+#  8. How to Reproduce
 
 Clone the repo:
 
@@ -206,23 +204,23 @@ python main.py
 
 ---
 
-# ✔️ 9. Assessment Coverage
+#  9. Assessment Coverage
 
 | Requirement | Status |
 |------------|--------|
-| Public dataset | ✔ SpaceX API |
-| Normalized schema | ✔ Star schema (3 dims + 1 fact) |
-| PK/FK + indexes | ✔ Implemented |
-| Idempotent ingestion | ✔ UPSERT logic |
-| ≥2 SQL questions | ✔ 10 total |
-| ≥1 Python analysis | ✔ Monthly trend chart |
-| One-command run | ✔ Optional main.py |
-| README included | ✔ This file |
-| No raw data checked in | ✔ API-based ETL |
+| Public dataset |  SpaceX API |
+| Normalized schema |  Star schema (3 dims + 1 fact) |
+| PK/FK + indexes |  Implemented |
+| Idempotent ingestion |  UPSERT logic |
+| ≥2 SQL questions |  10 total |
+| ≥1 Python analysis |  Monthly trend chart |
+| One-command run |  Optional main.py |
+| README included |  This file |
+| No raw data checked in |  API-based ETL |
 
 ---
 
-# 🛰️ Summary
+#  Summary
 
 This project showcases complete, production-style ETL and analytics using real-world API data, demonstrating strong skills in:
 
@@ -232,5 +230,4 @@ This project showcases complete, production-style ETL and analytics using real-w
 - Python engineering  
 - Communication & packaging  
 
-It is fully reproducible and assessment-ready.
 
