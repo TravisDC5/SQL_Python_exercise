@@ -3,8 +3,9 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime
 import os
+import matplotlib.pyplot as plt  # for the line chart
 
-# Connect to your existing SQLite DB built by spacex_ingest.py
+# Connect to your existing SQLite DB
 conn = sqlite3.connect("spacex.db")
 
 # Define SpaceX analytics queries (all-SQL)
@@ -44,7 +45,7 @@ queries = {
         LEFT JOIN DimPayload p ON f.payload_id = p.id
         GROUP BY r.id, r.name
         HAVING LaunchesWithPayload > 0
-        ORDER BY MaxPayloadKg DESC NULLS LAST, AvgPayloadKg DESC;
+        ORDER BY MaxPayloadKg DESC, AvgPayloadKg DESC;
     """,
 
     "4 Orbit Mix & Success Rate": """
@@ -154,9 +155,9 @@ results = {}
 
 # Run and display each query (pretty print)
 for title, sql in queries.items():
-    print("\n" + "="*100)
+    print("\n" + "=" * 100)
     print(title)
-    print("="*100)
+    print("=" * 100)
     try:
         df = pd.read_sql_query(sql, conn)
         if not df.empty:
@@ -175,19 +176,50 @@ if results:
 
     with pd.ExcelWriter(xlsx_path, engine="openpyxl") as writer:
         for title, df in results.items():
-
             # Excel sheet names must be valid and <= 31 characters
             invalid_chars = ['\\', '/', '*', '?', ':', '[', ']']
             sheet_name = title
             for ch in invalid_chars:
                 sheet_name = sheet_name.replace(ch, " ")
             sheet_name = sheet_name[:31]
-
             df.to_excel(writer, sheet_name=sheet_name, index=False)
 
-    print(f"\n Excel exported: {xlsx_path}")
+    print(f"\nExcel exported: {xlsx_path}")
 else:
-    print("\n No non-empty query results to export.")
+    print("\nNo non-empty query results to export.")
+
+# Create a monthly trend line chart (using query #6)
+title_trend = "6 Monthly Launch Trend (Count & Successes)"
+trend_df = results.get(title_trend)
+
+if trend_df is not None and not trend_df.empty:
+    # Ensure sorted by YearMonth
+    trend_df = trend_df.sort_values("YearMonth")
+
+    plt.figure(figsize=(12, 6))
+    plt.plot(trend_df["YearMonth"], trend_df["TotalLaunches"], marker="o", label="Total Launches")
+    plt.plot(trend_df["YearMonth"], trend_df["Successes"], marker="o", label="Successes")
+    plt.xticks(rotation=90)
+    plt.xlabel("Year-Month")
+    plt.ylabel("Count")
+    plt.title("SpaceX Monthly Launch Trend")
+    plt.legend()
+    plt.tight_layout()
+
+    img_path = OUTPUTS_DIR / "spacex_monthly_trend.png"
+    plt.savefig(img_path, dpi=180)
+    plt.close()
+
+    print(f"\nLine chart saved: {img_path}")
+
+    # Auto-open the PNG file (Windows)
+    try:
+        os.startfile(str(img_path))
+        print("Opened line chart automatically.")
+    except Exception as e:
+        print(f"Could not open line chart automatically: {e}")
+else:
+    print("\nMonthly trend data not available; chart not created.")
 
 # Close the DB connection
 conn.close()
@@ -196,7 +228,7 @@ print("\nFinished running SpaceX queries.")
 # Auto-open outputs folder (Windows)
 try:
     os.startfile(str(OUTPUTS_DIR))
-    print(f"\n Opened outputs folder: {OUTPUTS_DIR}")
+    print(f"\nOpened outputs folder: {OUTPUTS_DIR}")
 except Exception as e:
-    print(f"\n Could not open folder automatically: {e}")
+    print(f"\nCould not open folder automatically: {e}")
     print(f"You can open it manually here: {OUTPUTS_DIR}")
