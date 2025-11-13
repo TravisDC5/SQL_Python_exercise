@@ -180,7 +180,7 @@ outputs/spacex_monthly_trend.png
 Clone the repo:
 
 ```bash
-git clone <your-repo-url>
+git clone git@github.com:TravisDC5/SQL_Python_exercise.git
 cd <repo>
 ```
 
